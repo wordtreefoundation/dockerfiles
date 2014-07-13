@@ -1,0 +1,23 @@
+# maybe GetDir "apps" ?
+
+{{ range $i, $app := .apps }}
+upstream app{{ $i }} {
+{{with $obj := JsonUnmarshalObject $app.Value}}
+    server {{ $obj.ip }}:{{ $obj.port }};
+{{end}}
+}
+{{ end }}
+
+server {
+{{ range $i, $app := .apps }}
+{{with $obj := JsonUnmarshalObject $app.Value}}
+    location {{ $obj.mountpoint }} {
+        proxy_pass        http://app{{ $i }};
+        proxy_redirect    off;
+        proxy_set_header  Host             $host;
+        proxy_set_header  X-Real-IP        $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+   }
+{{ end }}
+{{ end }}
+}
