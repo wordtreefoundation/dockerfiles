@@ -1,6 +1,6 @@
 [template]
 keys = [
-  "apps",
+  "/apps",
 ]
 owner = "nginx"
 mode = "0644"

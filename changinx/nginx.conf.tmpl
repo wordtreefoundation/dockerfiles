@@ -12,6 +12,7 @@ server {
 {{ range $i, $app := .apps }}
 {{with $obj := JsonUnmarshalObject $app.Value}}
     location {{ $obj.mountpoint }} {
+        rewrite {{ $obj.mountpoint }}(/.*)? /$1 break;
         proxy_pass        http://app{{ $i }};
         proxy_redirect    off;
         proxy_set_header  Host             $host;

@@ -1,7 +1,7 @@
 #
 # RethinkDB Dockerfile
 #
-# https://github.com/wordtreefoundation/docker-rethinkdb
+# https://github.com/wordtreefoundation/dockerfiles/tree/master/rethinkdb
 #
 
 FROM dockerfile/ubuntu

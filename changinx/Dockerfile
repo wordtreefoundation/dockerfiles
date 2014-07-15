@@ -1,7 +1,7 @@
 #
-# Nginx Dockerfile
+# chaNginx Dockerfile
 #
-# https://github.com/wordtreefoundation/docker-nginx
+# https://github.com/wordtreefoundation/dockerfiles/tree/master/changinx
 #
 
 FROM wordtree/golang
@@ -15,6 +15,7 @@ RUN go get -u github.com/wordtreefoundation/confd
 RUN mkdir -p /etc/confd/{conf.d,templates}
 ADD nginx.toml /etc/confd/conf.d/nginx.toml
 ADD nginx.conf.tmpl /etc/confd/templates/nginx.conf.tmpl
+ADD confd.toml /etc/confd/confd.toml
 
 # [B] Install etcd
 RUN go get -u github.com/coreos/etcd
