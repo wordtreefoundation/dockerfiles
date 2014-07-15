@@ -17,7 +17,7 @@ below.
 
 ## Usage
 
-    docker run -d -p 8080:8080 -p 28015:28015 -p 29015:29015 dockerfile/rethinkdb
+    docker run -d -p 8080:8080 -p 28015:28015 -p 29015:29015 wordtree/rethinkdb
 
 ## Web UI
 
