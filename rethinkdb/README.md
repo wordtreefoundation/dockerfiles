@@ -8,11 +8,12 @@ This directory contains a Dockerfile for RethinkDB 1.13.1
 
 ## Volumes
 
+- /data
+
 Volumes are optional. If you'd like to keep the data outside of the container
 (something that is advisable but not necessary, i.e. you probably don't need it
-in development mode), then add "-v [datadir]:/data" to the Usage options below.
-
-- /data
+in development mode), then add "-v [yourdatadir]:/data" to the Usage options
+below.
 
 ## Usage
 
