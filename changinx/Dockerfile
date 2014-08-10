@@ -8,7 +8,7 @@ FROM wordtree/golang
 
 # Install requirements
 RUN apt-get update -qy && \
-    apt-get install --no-install-recommends -qy software-properties-common
+    apt-get install --no-install-recommends -qy software-properties-common apache2-utils
 
 # [A] Install confd from layerhq with JsonUnmarshalObject support
 RUN go get -u github.com/wordtreefoundation/confd
@@ -29,7 +29,7 @@ RUN add-apt-repository -y ppa:nginx/stable && \
     chown -R www-data:www-data /var/lib/nginx
 
 # Define mountable directories
-VOLUME ["/data", "/etc/nginx/sites-enabled", "/var/log/nginx"]
+VOLUME ["/data", "/conf", "/etc/nginx/sites-enabled", "/var/log/nginx"]
 
 # Define working directory
 WORKDIR /etc/nginx

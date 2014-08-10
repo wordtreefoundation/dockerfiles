@@ -12,12 +12,18 @@ server {
 {{ range $i, $app := .apps }}
 {{with $obj := JsonUnmarshalObject $app.Value}}
     location {{ $obj.mountpoint }} {
-        rewrite {{ $obj.mountpoint }}(/.*)? $1 break;
+        rewrite ^{{ $obj.mountpoint }}$ {{ $obj.mountpoint }}/ redirect;
+        rewrite ^{{ $obj.mountpoint }}(/.*)?$ $1 break;
         proxy_pass        http://app{{ $i }};
         proxy_redirect    off;
         proxy_set_header  Host             $host;
         proxy_set_header  X-Real-IP        $remote_addr;
         proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+
+        {{ if $obj.passwd_file }}
+        auth_basic "Restricted";
+        auth_basic_user_file /conf/{{ $obj.passwd_file }};
+        {{ end }}
    }
 {{ end }}
 {{ end }}
