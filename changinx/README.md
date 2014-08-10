@@ -17,10 +17,8 @@ auto-register themselves with nginx.
 
 ## Usage
 
-    docker run -d -p 80:80 wordtree/nginx
-
-## Attach persistent/shared directories
-
-    docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/sites-enabled -v <log-dir>:/var/log/nginx wordtree/nginx
+    docker run -d --name changinx -p 80:80 wordtree/changinx
 
 After few seconds, open `http://<host>` to see the welcome page.
+
+Ports 4001 and 7001 are exposed for etcd.
