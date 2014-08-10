@@ -9,8 +9,14 @@ do
 done
 echo "$(date) - connected successfully"
 
+if [[ "$APP_PASSWD_FILE" == "" ]]; then
+  PASSWD=""
+else
+  PASSWD=",\"passwd_file\":\"$APP_PASSWD_FILE\""
+fi
+
 # Register this app via etcd
 curl -L "http://$ETCD/v2/keys/apps/$APP_NAME" -XPUT \
-     -d "value={\"ip\":\"$HOST\",\"port\":$APP_PORT,\"mountpoint\":\"$APP_MOUNT\"}"
+     -d "value={\"ip\":\"$HOST\",\"port\":$APP_PORT,\"mountpoint\":\"$APP_MOUNT\"$PASSWD}"
 
 rethinkdb --bind all "$@"

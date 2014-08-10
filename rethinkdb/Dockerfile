@@ -16,7 +16,7 @@ RUN \
   sudo apt-get install -y rethinkdb
 
 # Define mountable directories.
-VOLUME ["/data"]
+VOLUME ["/data", "/var/log/rethinkdb"]
 
 # Define working directory.
 WORKDIR /data
@@ -35,6 +35,7 @@ ADD run.sh /run.sh
 ENV APP_PORT 8080
 ENV APP_NAME rethinkdb
 ENV APP_MOUNT /admin/db
+ENV APP_PASSWD_FILE admin.htpasswd
 
 # Define default command.
 CMD /run.sh
